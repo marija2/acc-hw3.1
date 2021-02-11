@@ -20,7 +20,6 @@ function incrementCosCounters() {
   else yCosCounter += 0.0001;
 }
 
-
 // holds the coordinates of the center of a pyramid
 // render draws the pyramid based on the center and the sideSize
 // color is modified based on cosCounter or sliders depending on whether the animation is active or not
@@ -29,57 +28,49 @@ class Pyramid {
 
     this.xCenter = x;
     this.yCenter = y; 
+
     this.reds = random(200);
     this.greens = random(200);
     this.blues = random(200);
+
+    // upper-left point
+    this.ulPt = [ x - sideSize / 2, y - sideSize / 2 ];
+
+    // upper-right point
+    this.urPt = [ x + sideSize / 2, y - sideSize / 2 ];
+
+    // lower-right point
+    this.lrPt = [ x + sideSize / 2, y + sideSize / 2 ];
+  
+    // lower-left point
+    this.llPt = [ x - sideSize / 2, y + sideSize / 2 ];
   }
 
   render() {
-    // upper-left point
-    var x1 = this.xCenter - sideSize / 2;
-    var y1 = this.yCenter - sideSize / 2;
-
-    // upper-right point
-    var x2 = this.xCenter + sideSize / 2;
-    var y2 = this.yCenter - sideSize / 2;
-
-    // lower-right point
-    var x3 = this.xCenter + sideSize / 2;
-    var y3 = this.yCenter + sideSize / 2;
-
-    // lower-left point
-    var x4 = this.xCenter - sideSize / 2;
-    var y4 = this.yCenter + sideSize / 2;
 
     // for determining the color of each triangle
-    var xDistanceFromCenter = cos(xCosCounter) * width / 2;
-    var yDistanceFromCenter = cos(yCosCounter) * width / 2;
+    var xShade = cos(xCosCounter) * 100;
+    var yShade = cos(yCosCounter) * 100;
 
     incrementCosCounters();
-
-    // have to transform numbers[-width/2,width/2] to [-100,100]
-    xDistanceFromCenter *= 100 / ( width / 2 );
-
-    // have to transform numbers[-height/2,height/2] to [-100,100]
-    yDistanceFromCenter *= 100 / ( height / 2 );
     
     // up triangle
-    fill ( this.reds + yDistanceFromCenter, this.greens +  yDistanceFromCenter, this.blues + yDistanceFromCenter );
-    triangle ( x1, y1, x2, y2, this.xCenter, this.yCenter );
+    fill ( this.reds + yShade, this.greens + yShade, this.blues + yShade );
+    triangle ( this.ulPt[0], this.ulPt[1], this.urPt[0], this.urPt[1], this.xCenter, this.yCenter );
     
     // left triangle
-    fill ( this.reds + xDistanceFromCenter, this.greens + xDistanceFromCenter, this.blues + xDistanceFromCenter );
-    triangle ( x1, y1, x4, y4, this.xCenter, this.yCenter );
+    fill ( this.reds + xShade, this.greens + xShade, this.blues + xShade );
+    triangle ( this.ulPt[0], this.ulPt[1], this.llPt[0], this.llPt[1], this.xCenter, this.yCenter );
     
     // down triangle
-    fill ( this.reds - yDistanceFromCenter, this.greens - yDistanceFromCenter, this.blues - yDistanceFromCenter );
-    triangle ( x3, y3, x4, y4, this.xCenter, this.yCenter );
+    fill ( this.reds - yShade, this.greens - yShade, this.blues - yShade );
+    triangle ( this.lrPt[0], this.lrPt[1], this.llPt[0], this.llPt[1], this.xCenter, this.yCenter );
     
     // right triangle
-    fill ( this.reds - xDistanceFromCenter, this.greens - xDistanceFromCenter, this.blues - xDistanceFromCenter);
-    triangle ( x3, y3, x2, y2, this.xCenter, this.yCenter );
+    fill ( this.reds - xShade, this.greens - xShade, this.blues - xShade );
+    triangle ( this.lrPt[0], this.lrPt[1], this.urPt[0], this.urPt[1], this.xCenter, this.yCenter );
   }
-}
+};
 
 function setup () {
 
