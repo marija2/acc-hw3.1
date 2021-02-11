@@ -23,6 +23,7 @@ function incrementCosCounters() {
   else yCosCounter += 0.0001;
 }
 
+
 // holds the coordinates of the center of a pyramid
 // render draws the pyramid based on the center and the sideSize
 // color is modified based on cosCounter or sliders depending on whether the animation is active or not
@@ -31,6 +32,9 @@ class Pyramid {
 
     this.xCenter = x;
     this.yCenter = y; 
+    this.reds = random(200);
+    this.greens = random(200);
+    this.blues = random(200);
   }
 
   render() {
@@ -61,21 +65,21 @@ class Pyramid {
 
     // have to transform numbers[-height/2,height/2] to [-100,100]
     yDistanceFromCenter *= 100 / ( height / 2 );
-
+    
     // up triangle
-    fill ( centerColor + yDistanceFromCenter );
+    fill ( this.reds + yDistanceFromCenter, this.greens +  yDistanceFromCenter, this.blues + yDistanceFromCenter );
     triangle ( x1, y1, x2, y2, this.xCenter, this.yCenter );
     
     // left triangle
-    fill ( centerColor + xDistanceFromCenter );
+    fill ( this.reds + xDistanceFromCenter, this.greens + xDistanceFromCenter, this.blues + xDistanceFromCenter );
     triangle ( x1, y1, x4, y4, this.xCenter, this.yCenter );
     
     // down triangle
-    fill ( centerColor - yDistanceFromCenter);
+    fill ( this.reds - yDistanceFromCenter, this.greens - yDistanceFromCenter, this.blues - yDistanceFromCenter );
     triangle ( x3, y3, x4, y4, this.xCenter, this.yCenter );
     
     // right triangle
-    fill ( centerColor - xDistanceFromCenter);
+    fill ( this.reds - xDistanceFromCenter, this.greens - xDistanceFromCenter, this.blues - xDistanceFromCenter);
     triangle ( x3, y3, x2, y2, this.xCenter, this.yCenter );
   }
 }
@@ -100,6 +104,7 @@ function setup () {
   animationHolder.style ( 'margin', '60px' );
 
   fillArray();
+
 }
 
 // calls render for all pyramids 
