@@ -81,10 +81,12 @@ class Pyramid {
   }
 }
 
-// creates the pyramids which will be seen on the screen
-// puts them into an array
-function fillArray () {
+function setup () {
 
+  var animationHolder = createCanvas ( 1500, 1000 );
+
+  // creates the pyramids which will be seen on the screen
+  // puts them into an array
   for ( var i = 0; i < width; i += sideSize ) {
 
     for ( var j = 0; j < height; j += sideSize ) {
@@ -92,15 +94,6 @@ function fillArray () {
       pyramids.push ( new Pyramid ( i + sideSize/2, j + sideSize/2 ) );
     }
   }
-
-}
-
-function setup () {
-
-  var animationHolder = createCanvas ( 1000, 1000 );
-  animationHolder.style ( 'margin', '60px' );
-
-  fillArray();
 
 }
 
