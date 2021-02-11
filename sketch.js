@@ -1,5 +1,5 @@
 // size of the side of a square
-// can be changed here manually or by using the slider
+// can be changed here manually
 var sideSize = 100;
 
 // holds all the pyramids visible on the screen
@@ -22,7 +22,7 @@ function incrementCosCounters() {
 
 // holds the coordinates of the center of a pyramid
 // render draws the pyramid based on the center and the sideSize
-// color is modified based on cosCounter or sliders depending on whether the animation is active or not
+// color is modified based on cosCounter
 class Pyramid {
   constructor ( x, y ) {
 
