@@ -2,9 +2,6 @@
 // can be changed here manually or by using the slider
 var sideSize = 100;
 
-// the color of the side of the pyramid when the light is directly above it
-var centerColor = 128;
-
 // holds all the pyramids visible on the screen
 var pyramids = [];
 
